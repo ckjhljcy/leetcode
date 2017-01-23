@@ -37,10 +37,30 @@ class Solution(object):
                         dif = new_dif
         return target+dif
 
-s = Solution()
+class Solution2():
+    def threeSumClosest(self, nums, target):
+        nums.sort()
+        result = nums[0] + nums[1] + nums[2]
+        for i in range(0, len(nums)-2):
+            j, k = i+1, len(nums)-1
+            while j < k:
+                sum = nums[i] + nums[j] + nums[k]
+                if sum == target:
+                    return target
+                if abs(sum - target) < abs(result - target):
+                    result = sum
+                if sum > target:
+                    k -= 1
+                else:
+                    j += 1
+        return result
+
+
+s = Solution2()
 #print(s.threeSumClosest([-1, 2, 1, -4], 1))
 #print(s.threeSumClosest([-1,-2,-3,-4,-5], -100))
 #print(s.threeSumClosest([1,2,3,4,5,6,7], -1))
+assert(s.threeSumClosest([0,0,0], 1) == 0)
 assert(s.threeSumClosest([0,2,1,-3],1) == 0)
 assert(s.threeSumClosest([1,1,-1,-1,3],-1) == -1)
 assert(s.threeSumClosest([1,6,9,14,16,70],81) == 80)
